@@ -90,5 +90,40 @@ btnCopy.addEventListener('click', async () => {
   }
 });
 
-// Initial render
+// ---- Help modal ----
+const modalOverlay = document.getElementById('modal-overlay');
+const btnHelp = document.getElementById('btn-help');
+const btnModalClose = document.getElementById('btn-modal-close');
+
+function openModal() {
+  modalOverlay.classList.add('active');
+  modalOverlay.setAttribute('aria-hidden', 'false');
+  btnModalClose.focus();
+}
+
+function closeModal() {
+  modalOverlay.classList.remove('active');
+  modalOverlay.setAttribute('aria-hidden', 'true');
+  btnHelp.focus();
+}
+
+btnHelp.addEventListener('click', openModal);
+btnModalClose.addEventListener('click', closeModal);
+
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+});
+
+// Show modal on first visit
+if (!localStorage.getItem('se-helper-seen')) {
+  openModal();
+  localStorage.setItem('se-helper-seen', '1');
+}
+
+// Start with example loaded
+input.value = EXAMPLE_JSON;
 render();
