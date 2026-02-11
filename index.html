@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SE Widget Helper</title>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="pulse" aria-hidden="true"></span>
+      <h1>SE Widget Helper</h1>
+    </div>
+    <p class="subtitle">JSON config &rarr; JS boilerplate</p>
+  </header>
+
+  <main>
+    <section class="panel panel-input">
+      <div class="panel-header">
+        <h2>json config</h2>
+        <button id="btn-example" type="button">load example</button>
+      </div>
+      <textarea
+        id="json-input"
+        spellcheck="false"
+        placeholder='{ "fieldName": { "type": "number", "value": 5 }, ... }'
+      ></textarea>
+      <div id="messages" class="messages" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel panel-output">
+      <div class="panel-header">
+        <h2>generated js</h2>
+        <button id="btn-copy" type="button">copy</button>
+      </div>
+      <div class="code-wrap">
+        <pre><code id="code-output" class="language-javascript"></code></pre>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

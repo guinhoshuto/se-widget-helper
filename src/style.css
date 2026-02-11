@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Surfaces — cool violet undertone */
+  --canvas: #0d0f14;
+  --surface: #13151c;
+  --surface-raised: #1a1d28;
+  --surface-inset: #0a0c10;
+
+  /* Text hierarchy */
+  --text-primary: #e2e0ef;
+  --text-secondary: #9896ad;
+  --text-tertiary: #6e6c82;
+  --text-ghost: #4a4860;
+
+  /* Borders — rgba for blending */
+  --border: rgba(147, 130, 220, 0.08);
+  --border-subtle: rgba(147, 130, 220, 0.05);
+  --border-emphasis: rgba(147, 130, 220, 0.15);
+  --border-focus: rgba(145, 71, 255, 0.5);
+
+  /* Accent — StreamElements purple */
+  --accent: #9147ff;
+  --accent-soft: rgba(145, 71, 255, 0.12);
+  --accent-text: #b380ff;
+
+  /* Semantic */
+  --error: #e5534b;
+  --error-bg: rgba(229, 83, 75, 0.08);
+  --error-border: rgba(229, 83, 75, 0.2);
+  --warning: #c69026;
+  --warning-bg: rgba(198, 144, 38, 0.08);
+  --warning-border: rgba(198, 144, 38, 0.2);
+  --success: #57ab5a;
+  --success-bg: rgba(87, 171, 90, 0.1);
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  /* Spacing — 8px base */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+
+  /* Type */
+  --font: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: var(--font);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Header ---- */
+header {
+  padding: var(--sp-4) var(--sp-6);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+/* Connection pulse — the signature */
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent), 0 0 12px rgba(145, 71, 255, 0.3);
+  animation: pulse 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 4px var(--accent); }
+  50% { opacity: 1; box-shadow: 0 0 8px var(--accent), 0 0 16px rgba(145, 71, 255, 0.3); }
+}
+
+header h1 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* ---- Main layout ---- */
+main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  min-height: 0;
+}
+
+/* ---- Panels ---- */
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--sp-4) var(--sp-5);
+}
+
+.panel-input {
+  border-right: 1px solid var(--border);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-3);
+}
+
+.panel-header h2 {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+}
+
+/* ---- Buttons ---- */
+button {
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: var(--sp-1) var(--sp-3);
+  border: 1px solid var(--border-emphasis);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  letter-spacing: 0.02em;
+}
+
+button:hover {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border-color: rgba(147, 130, 220, 0.25);
+}
+
+button:active {
+  background: var(--surface);
+}
+
+button:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+button.copied {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: rgba(87, 171, 90, 0.3);
+}
+
+/* ---- Textarea ---- */
+#json-input {
+  flex: 1;
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+  background: var(--surface-inset);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  font-family: var(--font);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  tab-size: 2;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+#json-input::placeholder {
+  color: var(--text-ghost);
+}
+
+#json-input:focus {
+  border-color: var(--border-focus);
+}
+
+/* ---- Messages ---- */
+.messages {
+  min-height: 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  border-radius: var(--radius-sm);
+  font-weight: 400;
+}
+
+.messages:empty {
+  display: none;
+}
+
+.messages.error {
+  margin-top: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1px solid var(--error-border);
+}
+
+.messages.warning {
+  margin-top: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--warning-bg);
+  color: var(--warning);
+  border: 1px solid var(--warning-border);
+}
+
+/* ---- Code output ---- */
+.code-wrap {
+  flex: 1;
+  min-height: 200px;
+  overflow: auto;
+  background: var(--surface-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.code-wrap pre {
+  margin: 0;
+  padding: var(--sp-4);
+  background: transparent !important;
+}
+
+.code-wrap code {
+  font-family: var(--font);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  background: transparent !important;
+}
+
+.code-wrap .hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(147, 130, 220, 0.12);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(147, 130, 220, 0.22);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-input {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel {
+    padding: var(--sp-3);
+  }
+
+  header {
+    padding: var(--sp-3) var(--sp-4);
+  }
+}
